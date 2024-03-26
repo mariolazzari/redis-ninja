@@ -70,3 +70,17 @@ set name "Yoshi" nx
 SET name "Mario" GET
 ```
 
+## Sets 
+```redis 
+SADD names Mario
+SADD names Yoshi Peach
+
+SREM names Yoshi
+
+SADD moreName Link Zelda
+
+SUNION names moreNames
+
+SISMEMBER names Mario
+
+```
