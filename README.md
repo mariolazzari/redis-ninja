@@ -104,3 +104,24 @@ LINDEX orders 0
 
 LPOS orders ryu
 ```
+
+## Hashes
+```redis
+HSET books:1 title "Book one"
+HSET books:1 author "Author Name"
+HSET books:1 rating 10
+
+
+HGET books:1 title
+
+HGETALL books:2
+
+HEXISTS books:1 title
+
+HKEYS books:1
+HVALS books:1
+
+HDEL books:2 title
+
+DEL books:1
+```
