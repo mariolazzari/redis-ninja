@@ -84,3 +84,23 @@ SUNION names moreNames
 SISMEMBER names Mario
 
 ```
+
+## Lists
+
+```redis 
+LPUSH orders ryu
+LPUSH orders chu-li
+
+RPUSH orders blanka ken
+
+LPOP orders
+
+RPOP orders 2
+
+LRANGE orders 0 1
+LRANGE orders -2 -1
+
+LINDEX orders 0
+
+LPOS orders ryu
+```
