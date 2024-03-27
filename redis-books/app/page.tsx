@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { client } from "@/lib/db";
 
-const getBooks = async () => {};
+const getBooks = async () => {
+  const books = await client.zRangeWithScores("books", 0, -1);
+};
 
 export default async function Home() {
   return (

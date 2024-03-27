@@ -125,3 +125,12 @@ HDEL books:2 title
 
 DEL books:1
 ```
+
+## Sorted set
+
+```redis
+ZADD books 7 "Book one" 2 "Book two" 9 "Third book"
+ZADD books NX 1 "Book one"
+
+ZRANGE books 0 -1
+```
