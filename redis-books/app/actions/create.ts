@@ -2,8 +2,15 @@
 import { client } from "@/lib/db"
 import { redirect } from 'next/navigation'
 
-export async function createBook(formData: any) {
-    const { title, rating, author, blurb } = Object.fromEntries(formData)
+type Book = {
+    title: string;
+    rating: number;
+    author: string;
+    blurb: string
+}
+
+export async function createBook(formData: FormData) {
+    const { title, rating, author, blurb } = Object.fromEntries(formData) as unknown as Book
 
     // create a book id
     const id = Math.floor(Math.random() * 100000)
@@ -15,7 +22,9 @@ export async function createBook(formData: any) {
     }, { NX: true })
 
     if (!unique) {
-        return { error: 'That book has already been added.' }
+        return {
+            error: 'That book has already been added.'
+        }
     }
 
     // save new hash for the book
