@@ -134,3 +134,24 @@ ZADD books NX 1 "Book one"
 
 ZRANGE books 0 -1
 ```
+
+## Redis stack
+
+```redis
+JSON.SET authors:1 $ `{
+    "name": "Mario",
+    "age": 48,
+    "books": [
+        {
+            "title": "Book one",
+            "rating": 10
+        },
+        {
+            "title": "Book two",
+            "rating": 20
+        }
+    ]
+}`
+
+JSON.GET authors:1
+```
