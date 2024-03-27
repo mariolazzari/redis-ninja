@@ -2,10 +2,18 @@ import Link from "next/link";
 import { client } from "@/lib/db";
 
 const getBooks = async () => {
-  const books = await client.zRangeWithScores("books", 0, -1);
+  const res = await client.zRangeWithScores("books", 0, -1);
+
+  const books = await Promise.all(
+    res.map(r => client.hGetAll(`books:${r.score}`))
+  );
+
+  return books;
 };
 
 export default async function Home() {
+  const books = await getBooks();
+
   return (
     <main>
       <nav className="flex justify-between">
@@ -15,7 +23,14 @@ export default async function Home() {
         </Link>
       </nav>
 
-      <p>List of books here.</p>
+      {books.map(book => (
+        <div key={book.title} className="card">
+          <h2>{book.title}</h2>
+          <p>By {book.author}</p>
+          <p>{book.blurb}</p>
+          <p>Rating: {book.rating}</p>
+        </div>
+      ))}
     </main>
   );
 }
